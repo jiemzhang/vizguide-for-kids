@@ -1,0 +1,15 @@
+<div class="container-fluid">
+  <h2>WHAT PET SHOULD I GET?</h2>
+  <p class="prompt">Please select a pet:</p>
+  <!--<pre class="card card-block card-header">{{radioModel || 'null'}}</pre>-->
+  <div class="btn-group options row">
+    <label *ngFor="let option of petOptions" class="btn btn-primary option col-sm-3" [(ngModel)]="radioModel" btnRadio="{{option.key}}">{{option.display}}</label>
+  </div>
+
+  <p class="prompt">What's your name:</p>
+  <input [(ngModel)]="personName" #ctrl="ngModel" required>
+  <!--<p *ngIf="personName" class="card card-block card-header">{{personName || ''}} selected {{radioModel || '...'}} </p>-->
+  <button type="button confirm-button" class="btn btn-primary" (click)="addPetChoice()">
+    Confirm your choice
+  </button>
+</div>

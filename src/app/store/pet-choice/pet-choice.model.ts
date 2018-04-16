@@ -1,10 +1,10 @@
 export enum Pet {
-  horse = 'HORSE',
-  dog = 'DOG',
-  cat = 'CAT',
-  fish = 'FISH',
-  Iguana = 'IGUANA',
-  other = 'OTHER'
+  horse = 'Horse',
+  dog = 'Dog',
+  cat = 'Cat',
+  fish = 'Fish',
+  iguana = 'Iguana',
+  other = 'Other'
 }
 
 /**

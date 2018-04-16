@@ -1,0 +1,37 @@
+$button-size: 70px;
+$button-radius: 35px;
+h2 {
+  font-size: 30px;
+  text-align: center;
+  margin-top: 30px;
+  font-family: "Comic Sans MS";
+}
+
+.prompt {
+  margin-top: 30px;
+}
+.options {
+  margin: 10px 0;
+
+  .option {
+    margin: 5px !important;
+    height: $button-size !important;
+    width: $button-size !important;
+    border-radius: $button-radius !important;
+    display: block !important;
+    text-align: center !important;
+    line-height: $button-size !important;
+    padding: 0 !important;
+    background-color: #5DADA8;
+    border-color: #5DADA8;
+
+    &.active {
+      background-color: #427876;
+      border-color: #427876;
+    }
+  }
+}
+
+.confirm-button {
+  clear: left;
+}
