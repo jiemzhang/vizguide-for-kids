@@ -8,11 +8,14 @@ import { environment } from '../environments/environment';
 import { PetSelectorComponent } from './components/pet-selector/pet-selector.component'; // Angular CLI environemnt
 import { ButtonsModule } from 'ngx-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ChartModule } from 'angular-highcharts';
+import { PieChartComponent } from './components/pie-chart/pie-chart.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PetSelectorComponent
+    PetSelectorComponent,
+    PieChartComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +26,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     }),
     ButtonsModule.forRoot(),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ChartModule
   ],
   providers: [],
   bootstrap: [AppComponent]

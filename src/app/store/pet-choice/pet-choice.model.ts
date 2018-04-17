@@ -25,3 +25,7 @@ export interface Result {
   count: number;     // how many people choose it
   voters: string[];   // people who chose it
 }
+
+export interface PetChoiceState {
+  results: Result[]
+}

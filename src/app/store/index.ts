@@ -1,10 +1,10 @@
-import { Result } from './pet-choice/pet-choice.model'
-import { petChoiceReducer } from './pet-choice/pet-choice.reducer';
+import {petChoiceReducer} from './pet-choice/pet-choice.reducer';
+import {PetChoiceState} from './pet-choice/pet-choice.model';
 
 export interface AppState {
-  petChoiceResults: Result[];
+  petChoice: PetChoiceState;
 }
 
 export const reducers = {
-  petChoices: petChoiceReducer
+  petChoice: petChoiceReducer
 };

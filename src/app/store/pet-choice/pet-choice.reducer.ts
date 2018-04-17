@@ -1,15 +1,24 @@
 import * as petChoice from'./pet-choice.action';
-import { PetChoice, Result, Pet } from './pet-choice.model';
+import { PetChoice, Result, Pet, PetChoiceState } from './pet-choice.model';
 import { get, findIndex, cloneDeep } from 'lodash';
+import { createSelector } from '@ngrx/store';
+import {AppState} from '../index';
 
-export const defaultState: Result[] = [ ];
+const defaultState: PetChoiceState = {
+  results: []
+};
 
-export function petChoiceReducer(state: Result[] = defaultState, action: petChoice.PetChoiceAddAction) {
+export function petChoiceReducer(
+  state = defaultState,
+  action: petChoice.All) {
 
   switch (action.type) {
     case petChoice.PET_CHOICE_ADD:
-
-      return addChoice(state, action.payload);
+      const newResults = addChoice(state, action.payload);
+      return {
+        ...state,
+        results: newResults
+      };
     default:
       return state;
   }
@@ -17,32 +26,32 @@ export function petChoiceReducer(state: Result[] = defaultState, action: petChoi
 
 const addChoice = function( state, entry: PetChoice) {
 
-  let newState = cloneDeep(state);
+  let newResults = cloneDeep(get(state, 'results', []));
   const pet = get(entry, 'choice');
   const person = get(entry, 'person');
-  const index = findIndex(state, { id: pet });
+  const index = findIndex(newResults, { id: pet });
 
   // if not found, add an entry
   if ( index < 0 ) {
-      newState.push ({
+    newResults.push ({
         id: pet,
         count: 1,
         voters: [ person ]
       });
   } else {
-    let foundItem = newState[index];
+    let foundItem = newResults[index];
 
     // only increment if the person haven't voted.
     if ( get(foundItem, 'voters',[]).indexOf( person ) < 0 ) {
       foundItem.count ++;
-      debugger;
       foundItem.voters.push(person);
     }
 
-    newState.splice(index, 1, foundItem);
+    newResults.splice(index, 1, foundItem);
   }
 
-  return newState;
+  return newResults;
 }
 
-
+export const selectPet = (state: AppState) => state.petChoice;
+export const selectPetResults = createSelector(selectPet, (state: PetChoiceState) => state.results);

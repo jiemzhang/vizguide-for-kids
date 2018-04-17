@@ -8,3 +8,5 @@ export class PetChoiceAddAction implements Action {
   type = PET_CHOICE_ADD;
   constructor(public payload: PetChoice) {}
 }
+
+export type All = PetChoiceAddAction;
