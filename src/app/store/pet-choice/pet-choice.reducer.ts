@@ -53,5 +53,5 @@ const addChoice = function( state, entry: PetChoice) {
   return newResults;
 }
 
-export const selectPet = (state: AppState) => state.petChoice;
-export const selectPetResults = createSelector(selectPet, (state: PetChoiceState) => state.results);
+export const selectPetChoice = (state: AppState) => state.petChoice;
+export const selectPetResults = createSelector(selectPetChoice, (state: PetChoiceState) => get(state, 'results') );
