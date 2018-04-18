@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { AppState } from '../../store';
 import { selectPetResults } from '../../store/pet-choice/pet-choice.reducer';
 import { Result } from '../../store/pet-choice/pet-choice.model';
-import { sumBy, set, findIndex } from 'lodash';
-import { Chart } from 'highcharts';
+import { sumBy, findIndex } from 'lodash';
 
 const colorMap = {
   'Horse': '#47acb1',
@@ -43,7 +42,6 @@ export class PieChartComponent implements OnInit {
     this.rawData$
       .subscribe( (data) => {
 
-        console.log(this.options);
         if ( data && data.length) {
           const totalVotes = sumBy(data, 'count');
           const chartData = data.map( item => {
@@ -81,7 +79,7 @@ export class PieChartComponent implements OnInit {
         width: 600
       },
       title: {
-        text: ''
+        text: 'Pie Chart'
       },
       tooltip: {
         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -110,12 +108,7 @@ export class PieChartComponent implements OnInit {
           showInLegend: true,
           animation: {
             duration: 1000
-          },
-          // dataLabels: {
-          //   color: '#000000',
-          //   connectorColor: '#FFFFFF',
-          //   format: '{y}%'
-          // }
+          }
         }
       },
       series: [

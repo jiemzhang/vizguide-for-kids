@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Store, select } from '@ngrx/store';
-import {Observable} from "rxjs/Observable";
+import { Store } from '@ngrx/store';
+import {Observable} from 'rxjs/Observable';
 import { AppState } from '../../store';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { PetChoiceAddAction } from '../../store/pet-choice/pet-choice.action';
-import {Pet, PetChoice, Result} from '../../store/pet-choice/pet-choice.model';
+import {Pet, Result} from '../../store/pet-choice/pet-choice.model';
 
 interface PetOption {
-  key: string,
-  display: string
+  key: string;
+  display: string;
 }
 
 @Component({
@@ -18,8 +18,8 @@ interface PetOption {
 })
 export class PetSelectorComponent implements OnInit {
 
-  radioModel: string = '';
-  personName: string = '';
+  radioModel = '';
+  personName = '';
   petOptions: PetOption[] = [];
   petChoices$: Observable<Result>;
 
