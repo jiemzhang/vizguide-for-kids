@@ -18,8 +18,8 @@ interface PetOption {
 })
 export class PetSelectorComponent implements OnInit {
 
-  radioModel = '';
-  personName = '';
+  selectedPet = '';
+  petName = '';
   petOptions: PetOption[] = [];
   petChoices$: Observable<Result>;
 
@@ -36,8 +36,11 @@ export class PetSelectorComponent implements OnInit {
 
   addPetChoice( ) {
     this.store.dispatch(new PetChoiceAddAction({
-      person: this.personName,
-      choice: Pet[this.radioModel]
+      person: this.petName,
+      choice: Pet[this.selectedPet]
     }));
+
+    this.petName = '';
+    this.selectedPet = '';
   }
 }

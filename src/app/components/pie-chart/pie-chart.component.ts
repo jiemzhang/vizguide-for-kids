@@ -101,7 +101,7 @@ export class PieChartComponent implements OnInit {
           cursor: 'pointer',
           dataLabels: {
             enabled: true,
-            distance: 20,
+            distance: 5,
             connectorColor: 'none',
             format: '{point.count}'
           },
