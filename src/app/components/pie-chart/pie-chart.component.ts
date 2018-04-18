@@ -1,10 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { Chart } from 'angular-highcharts';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { Store, select } from '@ngrx/store';
 import { AppState } from '../../store';
 import { selectPetResults } from '../../store/pet-choice/pet-choice.reducer';
 import { Result } from '../../store/pet-choice/pet-choice.model';
+import { sumBy, set, findIndex } from 'lodash';
+import { Chart } from 'highcharts';
+
+const colorMap = {
+  'Horse': '#47acb1',
+  'Dog': '#f06530',
+  'Cat': '#96247a',
+  'Fish': '#ffcd33',
+  'Iguana': '#286c4e',
+  'Other': '#7b7c7c'
+};
 
 interface ChartData {
   name: string;
@@ -18,86 +28,132 @@ interface ChartData {
   styleUrls: ['./pie-chart.component.scss']
 })
 export class PieChartComponent implements OnInit {
-  chart: Chart;
+  options: any;
   rawData$: Observable<Result[]>;
+  chart;
+
   constructor( private store: Store<AppState>) {
     this.rawData$ = this.store.select(selectPetResults);
   }
 
   ngOnInit() {
 
-    this.rawData$
-      .subscribe( data => {
-        debugger;
-      });
+    this.init();
 
-    let chart = new Chart({
+    this.rawData$
+      .subscribe( (data) => {
+
+        console.log(this.options);
+        if ( data && data.length) {
+          const totalVotes = sumBy(data, 'count');
+          const chartData = data.map( item => {
+            return {
+              name: item.id,
+              y: (item.count / totalVotes) * 100,
+              count: item.count,
+              color: colorMap[item.id]
+            };
+          });
+
+          chartData.map( datum => {
+            const index = findIndex(this.chart.series[0].data, {name: datum.name});
+            if (index < 0 ) {
+              this.chart.series[0].addPoint(datum, true, false, true);
+            } else {
+              this.chart.series[0].data[index].update(datum);
+            }
+          });
+
+        }
+      });
+  }
+
+  init() {
+    this.options = {
       chart: {
         plotBackgroundColor: null,
         plotBorderWidth: null,
         plotShadow: false,
         type: 'pie',
-        marginRight: 150,
-        marginLeft: 50
+        marginRight: 130,
+        marginLeft: 30,
+        height: 350,
+        width: 600
       },
       title: {
-        text: 'Pie Chart'
+        text: ''
       },
       tooltip: {
         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
       },
-      // legend: {
-      //   layout: 'vertical',
-      //   align: 'right',
-      //   squareSymbol: true,
-      //   symbolHeight: 20,
-      //   symbolRadius: 0,
-      //   verticalAlign: 'top',
-      //   x: 0,
-      //   y: 100,
-      //   itemMarginBottom: 20
-      // },
+      legend: {
+        layout: 'vertical',
+        align: 'right',
+        squareSymbol: true,
+        symbolHeight: 20,
+        symbolRadius: 0,
+        verticalAlign: 'top',
+        x: 0,
+        y: 40,
+        itemMarginBottom: 20
+      },
       plotOptions: {
         pie: {
           allowPointSelect: true,
           cursor: 'pointer',
           dataLabels: {
-            enabled: false
+            enabled: true,
+            distance: 20,
+            connectorColor: 'none',
+            format: '{point.count}'
           },
-          showInLegend: true
+          showInLegend: true,
+          animation: {
+            duration: 1000
+          },
+          // dataLabels: {
+          //   color: '#000000',
+          //   connectorColor: '#FFFFFF',
+          //   format: '{y}%'
+          // }
         }
       },
-      series: [{
-        name: 'Pet Choices',
-        data: [{
-          name: 'horse',
-          y: 20,
-          color: '#47acb1'
-        }, {
-          name: 'dog',
-          y: 20,
-          color: '#f06530'
-        }, {
-          name: 'cat',
-          y: 20,
-          color: '#96247a'
-        }, {
-          name: 'Iguana',
-          y: 20,
-          color: '#ffcd33'
-        }, {
-          name: 'fish',
-          y: 10,
-          color: '#286c4e'
-        },
-          {
-            name: 'other',
-            color: '7b7c7c'
-          }]
+      series: [
+        {
+        name: 'number selected',
+        id: 'pieSerie',
+        data: [
+        //   {
+        //   name: 'Horse',
+        //   y: 0,
+        //   color: '#47acb1'
+        // }, {
+        //   name: 'Dog',
+        //   y: 0,
+        //   color: '#f06530'
+        // }, {
+        //   name: 'Cat',
+        //   y: 0,
+        //   color: '#96247a'
+        // }, {
+        //   name: 'Iguana',
+        //   y: 0,
+        //   color: '#ffcd33'
+        // }, {
+        //   name: 'Fish',
+        //   y: 0,
+        //   color: '#286c4e'
+        // },
+        //   {
+        //     name: 'Other',
+        //     color: '7b7c7c'
+        //   }
+          ]
       }]
-    });
-
-    this.chart = chart;
+    };
   }
 
+  saveInstance( chartInstance ) {
+    this.chart = chartInstance;
+  }
 }

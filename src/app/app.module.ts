@@ -8,8 +8,13 @@ import { environment } from '../environments/environment';
 import { PetSelectorComponent } from './components/pet-selector/pet-selector.component'; // Angular CLI environemnt
 import { ButtonsModule } from 'ngx-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ChartModule } from 'angular-highcharts';
+import { ChartModule } from 'angular2-highcharts';
+import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
 import { PieChartComponent } from './components/pie-chart/pie-chart.component';
+
+export function highchartsFactory() {
+  return require('highcharts');
+}
 
 @NgModule({
   declarations: [
@@ -29,7 +34,10 @@ import { PieChartComponent } from './components/pie-chart/pie-chart.component';
     ReactiveFormsModule,
     ChartModule
   ],
-  providers: [],
+  providers: [{
+    provide: HighchartsStatic,
+    useFactory: highchartsFactory
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
