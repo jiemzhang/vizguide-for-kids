@@ -2,12 +2,14 @@
   <h2>WHAT PET SHOULD I GET?</h2>
   <p class="prompt">Please select a pet:</p>
   <div class="btn-group options row">
-    <label *ngFor="let option of petOptions" class="btn btn-primary option col-sm-3" [(ngModel)]="selectedPet" btnRadio="{{option.key}}">{{option.display}}</label>
+    <label *ngFor="let option of petOptions" class="btn btn-primary option col-sm-3 {{option.key}}" [(ngModel)]="selectedPet" btnRadio="{{option.key}}">{{option.display}}</label>
   </div>
 
   <p class="prompt">What's your name:</p>
-  <input [(ngModel)]="petName" #ctrl="ngModel" required>
-  <button type="button confirm-button" class="btn btn-primary" [disabled]="!(petName && selectedPet)" (click)="addPetChoice()">
-    Confirm your choice
-  </button>
+  <div class="name-section">
+    <input class="pet-input" [(ngModel)]="petName" #ctrl="ngModel" required>
+    <button type="button confirm-button" class="btn btn-primary pet-btn" [disabled]="!(petName && selectedPet)" (click)="addPetChoice()">
+      Confirm your choice
+    </button>
+  </div>
 </div>

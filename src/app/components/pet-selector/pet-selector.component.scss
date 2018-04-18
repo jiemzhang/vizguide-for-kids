@@ -1,8 +1,16 @@
 $button-size: 70px;
 $button-radius: 35px;
+
+$horse: #47acb1;
+$dog: #f06530;
+$cat: #96247a;
+$fish: #ffcd33;
+$iguana: #286c4e;
+$other: #7b7c7c;
+
 h2 {
   font-size: 30px;
-  text-align: center;
+  //text-align: center;
   margin-top: 30px;
   font-family: "Comic Sans MS";
 }
@@ -22,14 +30,111 @@ h2 {
     text-align: center !important;
     line-height: $button-size !important;
     padding: 0 !important;
-    background-color: #5DADA8;
-    border-color: #5DADA8;
+    background-color: #FFFFFF;
+    border-color: #CAC8C8;
+    color: #0E3843;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.20);
+
+    &.horse {
+      border-color: $horse;
+    }
+
+    &.dog {
+      border-color: $dog;
+    }
+
+    &.cat {
+      border-color: $cat;
+    }
+
+    &.fish {
+      border-color: $fish;
+    }
+
+    &.iguana {
+      border-color: $iguana;
+    }
+
+    &.other {
+      border-color: $other;
+    }
 
     &.active {
-      background-color: #427876;
-      border-color: #427876;
+
+      background-color: #CAC8C8;
+      //border-color: #B5B3B3;
+
+      &.horse {
+        background-color: $horse;
+        color: #FFFFFF;
+      }
+
+      &.dog {
+        background-color: $dog;
+        color: #FFFFFF;
+      }
+
+      &.cat {
+        background-color: $cat;
+        color: #FFFFFF;
+      }
+
+      &.fish {
+        background-color: $fish;
+      }
+
+      &.iguana {
+        background-color: $iguana;
+        color: #FFFFFF;
+      }
+
+      &.other {
+        background-color: $other;
+        color: #FFFFFF;
+      }
+
     }
   }
+}
+
+.name-section {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.pet-btn{
+  background-color: #33D5FF;
+  color: #000000;
+  border: 1px solid darken(#33D5FF, 10%);
+  padding-left: 1.5em;
+  padding-right: 1.5em;
+  margin-bottom: .5em;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.20);
+  transition: all 1s ease;
+}
+
+.pet-btn:hover {
+  border: 1px solid #33D5FF;
+  background-color: lighten(#33D5FF, 10%);
+  box-shadow: 0 6px 6px 0 rgba(0,0,0,0.17);
+  transition: all 0.5s ease;
+}
+
+.pet-input {
+  height: 2.5em;
+  padding-left: 0.4em;
+  font-family: "Comic Sans MS";
+  margin-right: 1em;
+  margin-bottom: .5em;
+}
+
+.pet-btn:disabled{
+  background-color: #EEEEEE;
+  color: #555555;
+  border-color: #888888;
+  padding-left: 1.5em;
+  padding-right: 1.5em;
+  box-shadow: 0 4px 4px 0 rgba(0,0,0,0.17);
 }
 
 .confirm-button {
