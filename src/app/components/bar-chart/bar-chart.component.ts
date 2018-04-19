@@ -56,7 +56,7 @@ export class BarChartComponent implements OnInit {
       chart: {
         type: 'column',
         height: 300,
-        width: 400
+        width: 520
       },
       colors: [
         '#47acb1',
