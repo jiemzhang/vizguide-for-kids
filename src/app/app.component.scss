@@ -1,5 +1,6 @@
 .wrapper {
   height: 100vh;
+  font-family: 'Lato', sans-serif;
 
   .row{
     background-color: #EEEEEE;
@@ -11,11 +12,14 @@
 
   .right{
     height: 100%;
+    margin-left: 30px;
 
     .chart{
       margin: 30px 0px;
       padding: 15px;
       background-color: white;
+      height: 350px;
+      width: 450px;
     }
   }
 }
