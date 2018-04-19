@@ -1,0 +1,15 @@
+<div class="table-container">
+  <ngx-datatable
+    #mydatatable
+    [headerHeight]="50"
+    [limit]="5"
+    [columnMode]="'flex'"
+    [footerHeight]="50"
+    [rowHeight]="'auto'"
+    [trackByProp]="'id'"
+    [rows]="rows">
+    <ngx-datatable-column name="Pet Type" prop="id" [flexGrow]="1"></ngx-datatable-column>
+    <ngx-datatable-column name="Count" prop="count" [flexGrow]="1"></ngx-datatable-column>
+    <ngx-datatable-column name="Who Chose It" prop="voters" [flexGrow]="2"></ngx-datatable-column>
+  </ngx-datatable>
+</div>

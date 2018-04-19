@@ -75,8 +75,8 @@ export class PieChartComponent implements OnInit {
         type: 'pie',
         marginRight: 130,
         marginLeft: 30,
-        height: 350,
-        width: 600
+        // height: 350,
+        // width: 600
       },
       title: {
         text: 'Pie Chart'

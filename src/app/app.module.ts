@@ -12,6 +12,8 @@ import { ChartModule } from 'angular2-highcharts';
 import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
 import { PieChartComponent } from './components/pie-chart/pie-chart.component';
 import { BarChartComponent } from './components/bar-chart/bar-chart.component';
+import { DataTableComponent } from './components/data-table/data-table.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 export function highchartsFactory() {
   return require('highcharts');
@@ -22,7 +24,8 @@ export function highchartsFactory() {
     AppComponent,
     PetSelectorComponent,
     PieChartComponent,
-    BarChartComponent
+    BarChartComponent,
+    DataTableComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,8 @@ export function highchartsFactory() {
     ButtonsModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
-    ChartModule
+    ChartModule,
+    NgxDatatableModule
   ],
   providers: [{
     provide: HighchartsStatic,
