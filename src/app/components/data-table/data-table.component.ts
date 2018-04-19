@@ -19,6 +19,7 @@ export class DataTableComponent implements OnInit {
 
   ngOnInit() {
     this.rawData$.subscribe( data => {
+
       this.rows = data.map( datum => {
         return {
           id: datum.id,
